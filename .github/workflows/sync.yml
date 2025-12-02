@@ -1,0 +1,56 @@
+name: Docker Tools Sync
+
+on:
+  schedule:
+    # 每小时运行一次 (cron: 0 */1 * * *)
+    - cron: '0 */1 * * *'
+  workflow_dispatch: # 允许手动触发
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+      
+    - name: 设置Python环境
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.14'
+        
+    - name: 安装依赖
+      run: |
+        pip install requests
+        
+    - name: 创建data目录
+      run: |
+        mkdir -p ./data
+        
+    - name: 运行同步脚本
+      run: |
+        python sync.py
+        
+    - name: Release
+      if: success()
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          data/**
+        tag_name: latest
+        name: Docker Tools Latest
+        body: |
+          ## Docker Tools 最新版本
+          
+          ### 说明:
+          自动从官方仓库同步的最新 Docker 相关工具。
+          
+          **注意**: 这是一个自动更新的 Release，每次发现新版本时会自动替换文件。
+        draft: false
+        prerelease: false
+        generate_release_notes: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
