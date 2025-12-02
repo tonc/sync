@@ -1,7 +1,6 @@
 import requests
 from datetime import datetime
-import time
-import os
+import time, os
 
 # 配置常量
 TOKEN = os.getenv('TOKEN', '')
