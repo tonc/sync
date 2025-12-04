@@ -34,6 +34,25 @@ jobs:
       run: |
         python sync.py
         
+    - name: 删除现有的 Release 和 Tag
+      if: success()
+      run: |
+        # 删除现有的 latest release
+        RELEASE_ID=$(gh api repos/:owner/:repo/releases/tags/latest --jq '.id' 2>/dev/null || echo "")
+        if [ ! -z "$RELEASE_ID" ]; then
+          echo "删除现有的 latest release (ID: $RELEASE_ID)"
+          gh api --method DELETE repos/:owner/:repo/releases/$RELEASE_ID
+        fi
+        
+        # 删除现有的 latest tag
+        if git rev-parse --verify refs/tags/latest >/dev/null 2>&1; then
+          echo "删除现有的 latest tag"
+          git tag -d latest
+          git push origin :refs/tags/latest
+        fi
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
     - name: Release
       if: success()
       uses: softprops/action-gh-release@v2
