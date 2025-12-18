@@ -194,7 +194,7 @@ def get_readme():
     """获取readme"""
     try:
         print("\n🐋 获取readme...")
-        url = 'https://raw.githubusercontent.com/tonc/sync/refs/heads/main/ReadMe.md'
+        url = 'https://raw.githubusercontent.com/tonc/sync/refs/heads/main/README.md'
         download_file(url, filename='ReadMe.md', headers=BROWSER_HEADERS)
         
         print("✅ ReadMe.md下载成功")
