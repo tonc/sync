@@ -177,6 +177,32 @@ def get_docker():
         print(f"❌ 获取Docker安装脚本失败: {str(e)}")
         return False
 
+def get_daemon():
+    """获取daemon"""
+    try:
+        print("\n🐋 获取daemon...")
+        url = 'https://raw.githubusercontent.com/tonc/sync/refs/heads/main/daemon.json'
+        download_file(url, filename='daemon.json', headers=BROWSER_HEADERS)
+        
+        print("✅ daemon下载成功")
+        return True
+    except Exception as e:
+        print(f"❌ 获取daemon失败: {str(e)}")
+        return False
+
+def get_readme():
+    """获取readme"""
+    try:
+        print("\n🐋 获取readme...")
+        url = 'https://raw.githubusercontent.com/tonc/sync/refs/heads/main/ReadMe.md'
+        download_file(url, filename='ReadMe.md', headers=BROWSER_HEADERS)
+        
+        print("✅ ReadMe.md下载成功")
+        return True
+    except Exception as e:
+        print(f"❌ 获取ReadMe.md失败: {str(e)}")
+        return False
+
 def get_tags_sorted_by_commit_time(repo_owner, repo_name):
     """获取GitHub仓库标签并按提交时间排序"""
     print(f"\n🏷️ 获取仓库 {repo_owner}/{repo_name} 的标签...")
@@ -269,7 +295,7 @@ def main():
     
     # 下载所有文件
     success_count = 0
-    total_count = 4
+    total_count = 6
     
     if get_DockerDesktop():
         success_count += 1
@@ -278,6 +304,10 @@ def main():
     if get_WSL2():
         success_count += 1
     if get_docker():
+        success_count += 1
+    if get_daemon():
+        success_count += 1
+    if get_readme():
         success_count += 1
     print(f"\n📊 下载统计: {success_count}/{total_count} 成功")
     
