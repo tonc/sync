@@ -203,6 +203,19 @@ def get_readme():
         print(f"❌ 获取ReadMe.md失败: {str(e)}")
         return False
 
+def get_DistributionInfo():
+    """获取DistributionInfo"""
+    try:
+        print("\n🐋 获取DistributionInfo...")
+        url = 'https://raw.githubusercontent.com/microsoft/WSL/refs/heads/master/distributions/DistributionInfo.json'
+        download_file(url, filename='DistributionInfo.json', headers=BROWSER_HEADERS)
+        
+        print("✅ DistributionInfo.json下载成功")
+        return True
+    except Exception as e:
+        print(f"❌ 获取DistributionInfo.json失败: {str(e)}")
+        return False
+        
 def get_tags_sorted_by_commit_time(repo_owner, repo_name):
     """获取GitHub仓库标签并按提交时间排序"""
     print(f"\n🏷️ 获取仓库 {repo_owner}/{repo_name} 的标签...")
@@ -295,7 +308,7 @@ def main():
     
     # 下载所有文件
     success_count = 0
-    total_count = 6
+    total_count = 7
     
     if get_DockerDesktop():
         success_count += 1
@@ -308,6 +321,8 @@ def main():
     if get_daemon():
         success_count += 1
     if get_readme():
+        success_count += 1
+    if get_DistributionInfo()
         success_count += 1
     print(f"\n📊 下载统计: {success_count}/{total_count} 成功")
     
