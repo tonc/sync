@@ -322,7 +322,7 @@ def main():
         success_count += 1
     if get_readme():
         success_count += 1
-    if get_DistributionInfo()
+    if get_DistributionInfo():
         success_count += 1
     print(f"\n📊 下载统计: {success_count}/{total_count} 成功")
     
