@@ -254,8 +254,9 @@ def get_DockerDesktop():
         # 要下载的文件列表
         files_to_download = [
             'app-Windows-x86.asar',
-            'app-Windows-x86-v2beta.asar',
-            f'DockerDesktop-{tag_name}-Windows-x86.exe'
+            'app-Mac-apple.asar',
+            f'DockerDesktop-{tag_name}-Windows-x86.exe',
+            f'DockerDesktop-{tag_name}-Mac-apple.dmg'
         ]
         
         for asset in data['assets']:
