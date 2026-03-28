@@ -38,7 +38,9 @@ jobs:
       if: success()
       run: |
         # 删除现有的 latest release
-        RELEASE_ID=$(gh api repos/:owner/:repo/releases/tags/latest --jq '.id' 2>/dev/null || echo "")
+        # RELEASE_ID=$(gh api repos/:owner/:repo/releases/tags/latest --jq '.id' 2>/dev/null || echo "")
+        # 修复：获取最新的 Release ID（不再用 latest 标签）
+        RELEASE_ID=$(gh release list --limit 1 --json id -q ".[0].id" 2>/dev/null || echo "")
         if [ ! -z "$RELEASE_ID" ]; then
           echo "删除现有的 latest release (ID: $RELEASE_ID)"
           gh api --method DELETE repos/:owner/:repo/releases/$RELEASE_ID
