@@ -253,8 +253,8 @@ def get_DockerDesktop():
         
         # 要下载的文件列表
         files_to_download = [
-            'app-Windows-x86.asar',
-            'app-Mac-apple.asar',
+            'app-Windows-x86.zip',
+            'app-Mac-apple.zip',
             f'DockerDesktop-{tag_name}-Windows-x86.exe',
             f'DockerDesktop-{tag_name}-Mac-apple.dmg'
         ]
