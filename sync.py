@@ -335,8 +335,12 @@ def get_WSL2():
         # 获取Ubuntu和Debian下载链接
         ubuntu_url = data['ModernDistributions']['Ubuntu'][0]['Amd64Url']['Url']
         debian_url = data['ModernDistributions']['Debian'][0]['Amd64Url']['Url']
+        ubuntu24_url = data['ModernDistributions']['Ubuntu-24.04'][0]['Amd64Url']['Url']
+        ubuntu22_url = data['ModernDistributions']['Ubuntu-22.04'][0]['Amd64Url']['Url']
         
         download_file(ubuntu_url, headers=BROWSER_HEADERS)
+        download_file(ubuntu24_url, headers=BROWSER_HEADERS)
+        download_file(ubuntu22_url, headers=BROWSER_HEADERS)
         # 尝试下载 Debian，但由于 PoW 保护可能失败
         print("\n[WARNING] Debian 的下载链接受 PoW 保护，可能无法使用 requests 下载")
         print(f"   手动下载地址: {debian_url}")
