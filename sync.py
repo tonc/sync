@@ -335,8 +335,8 @@ def get_WSL2():
         # 获取Ubuntu和Debian下载链接
         ubuntu_url = data['ModernDistributions']['Ubuntu'][0]['Amd64Url']['Url']
         debian_url = data['ModernDistributions']['Debian'][0]['Amd64Url']['Url']
-        ubuntu24_url = data['ModernDistributions']['Ubuntu-24.04'][0]['Amd64Url']['Url']
-        ubuntu22_url = data['ModernDistributions']['Ubuntu-22.04'][0]['Amd64Url']['Url']
+        ubuntu24_url = data['ModernDistributions']['Ubuntu'][2]['Amd64Url']['Url']
+        ubuntu22_url = data['ModernDistributions']['Ubuntu'][3]['Amd64Url']['Url']
         
         download_file(ubuntu_url, headers=BROWSER_HEADERS)
         download_file(ubuntu24_url, headers=BROWSER_HEADERS)
