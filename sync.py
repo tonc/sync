@@ -268,6 +268,29 @@ def get_DockerDesktop():
         print(f"[ERROR] 获取DockerDesktop失败: {str(e)}")
         return False
 
+def get_fileterm():
+    """获取fileterm相关文件"""
+    try:
+        print("\n[DOCKER] 获取fileterm...")
+        url = 'https://api.github.com/repos/St0ff3l/fileterm/releases/latest'
+        response = safe_request(url, headers=GITHUB_HEADERS)
+        data = response.json()
+        tag_name = data['tag_name']
+        
+        # 要下载的文件列表
+        files_to_download = [
+            'windows-x64'
+        ]
+        
+        for asset in data['assets']:
+            if files_to_download in asset['name']:
+                download_file(asset['browser_download_url'])
+        
+        return True
+    except Exception as e:
+        print(f"[ERROR] 获取fileterm失败: {str(e)}")
+        return False
+
 
 def get_WSL():
     """获取WSL安装包"""
@@ -468,6 +491,7 @@ def main():
     
     if get_DockerDesktop():
         success_count += 1
+    if get_get_fileterm()
     if get_WSL():
         success_count += 1
     if get_WSL2():
