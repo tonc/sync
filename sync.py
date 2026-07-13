@@ -491,7 +491,8 @@ def main():
     
     if get_DockerDesktop():
         success_count += 1
-    if get_get_fileterm()
+    if get_fileterm):
+        print('fileterm成功')
     if get_WSL():
         success_count += 1
     if get_WSL2():
