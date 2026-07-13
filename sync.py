@@ -283,7 +283,7 @@ def get_fileterm():
         ]
         
         for asset in data['assets']:
-            if files_to_download in asset['name']:
+            if 'windows-x64' in asset['browser_download_url']:
                 download_file(asset['browser_download_url'])
         
         return True
