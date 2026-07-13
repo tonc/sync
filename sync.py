@@ -275,12 +275,6 @@ def get_fileterm():
         url = 'https://api.github.com/repos/St0ff3l/fileterm/releases/latest'
         response = safe_request(url, headers=GITHUB_HEADERS)
         data = response.json()
-        tag_name = data['tag_name']
-        
-        # 要下载的文件列表
-        files_to_download = [
-            'windows-x64'
-        ]
         
         for asset in data['assets']:
             if 'windows-x64' in asset['browser_download_url']:
@@ -289,6 +283,23 @@ def get_fileterm():
         return True
     except Exception as e:
         print(f"[ERROR] 获取fileterm失败: {str(e)}")
+        return False
+
+def get_wsl-dashboard():
+    """获取wsl-dashboard相关文件"""
+    try:
+        print("\n[DOCKER] 获取wsl-dashboard...")
+        url = 'https://api.github.com/repos/owu/wsl-dashboard/releases/latest'
+        response = safe_request(url, headers=GITHUB_HEADERS)
+        data = response.json()
+        
+        for asset in data['assets']:
+            if 'Setup.x64.exe' in asset['browser_download_url']:
+                download_file(asset['browser_download_url'])
+        
+        return True
+    except Exception as e:
+        print(f"[ERROR] 获取wsl-dashboard失败: {str(e)}")
         return False
 
 
