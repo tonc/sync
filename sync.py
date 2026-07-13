@@ -285,7 +285,7 @@ def get_fileterm():
         print(f"[ERROR] 获取fileterm失败: {str(e)}")
         return False
 
-def get_wsl-dashboard():
+def get_wsldashboard():
     """获取wsl-dashboard相关文件"""
     try:
         print("\n[DOCKER] 获取wsl-dashboard...")
@@ -508,6 +508,8 @@ def main():
         success_count += 1
     if get_fileterm():
         print('fileterm成功')
+    if get_wsldashboard():
+        print('wsldashboard成功')
     if get_WSL():
         success_count += 1
     if get_WSL2():
