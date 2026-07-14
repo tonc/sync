@@ -3,7 +3,7 @@ name: Docker Tools Sync
 on:
   schedule:
     # 每小时运行一次 (cron: 0 */1 * * *)
-    - cron: '0 */4 * * *'
+    - cron: '0 */8 * * *'
   workflow_dispatch: # 允许手动触发
 
 permissions:
