@@ -277,7 +277,7 @@ def get_fileterm():
         data = response.json()
         
         for asset in data['assets']:
-            if 'windows-x64' in asset['browser_download_url']:
+            if 'windows-x64' in asset['browser_download_url'] and 'sig' not in asset['browser_download_url']:
                 download_file(asset['browser_download_url'])
         
         return True
