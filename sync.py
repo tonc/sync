@@ -302,6 +302,23 @@ def get_wsldashboard():
         print(f"[ERROR] 获取wsl-dashboard失败: {str(e)}")
         return False
 
+def get_wslui():
+    """获取wslui相关文件"""
+    try:
+        print("\n[DOCKER] 获取wsl-dashboard...")
+        url = 'https://api.github.com/repos/octasoft-ltd/wsl-ui/releases/latest'
+        response = safe_request(url, headers=GITHUB_HEADERS)
+        data = response.json()
+        
+        for asset in data['assets']:
+            if 'x64-setup.exe' in asset['browser_download_url']:
+                download_file(asset['browser_download_url'])
+        
+        return True
+    except Exception as e:
+        print(f"[ERROR] 获取wslui失败: {str(e)}")
+        return False
+
 
 def get_WSL():
     """获取WSL安装包"""
@@ -511,6 +528,8 @@ def main():
         success_count += 1
     if get_fileterm():
         print('fileterm成功')
+    if get_wslui():
+        print('get_wslui成功')
     if get_wsldashboard():
         print('wsldashboard成功')
     if get_WSL():
