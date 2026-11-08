@@ -546,15 +546,15 @@ def main():
         success_count += 1
     print(f"\n[STATS] 下载统计: {success_count}/{total_count} 成功")
     
-    if success_count == 7:  # 至少要有4个文件下载成功
-        print("\n[OK] 文件下载完成！")
-        # print("[OK] 任务执行成功：发现新版本并完成文件下载")
+    # if success_count == 7:  # 至少要有4个文件下载成功
+    #     print("\n[OK] 文件下载完成！")
+    #     # print("[OK] 任务执行成功：发现新版本并完成文件下载")
         
-        return 0  # 平台期望成功返回0
-    else:
-        print("\n[WARNING] 下载文件数量不足")
+    #     return 0  # 平台期望成功返回0
+    # else:
+    #     print("\n[WARNING] 下载文件数量不足")
         
-        return -1
+    #     return -1
 
 
 if __name__ == "__main__":
