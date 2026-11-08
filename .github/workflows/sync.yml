@@ -34,26 +34,35 @@ jobs:
       run: |
         python sync.py
         
-    # - name: 删除现有的 Release 和 Tag
-    #   if: success()
-    #   run: |
-    #     # 删除现有的 latest release
-    #     # RELEASE_ID=$(gh api repos/:owner/:repo/releases/tags/latest --jq '.id' 2>/dev/null || echo "")
-    #     # 修复：获取最新的 Release ID（不再用 latest 标签）
-    #     RELEASE_ID=$(gh release list --limit 1 --json id -q ".[0].id" 2>/dev/null || echo "")
-    #     if [ ! -z "$RELEASE_ID" ]; then
-    #       echo "删除现有的 latest release (ID: $RELEASE_ID)"
-    #       gh api --method DELETE repos/:owner/:repo/releases/$RELEASE_ID
-    #     fi
-        
-    #     # 删除现有的 latest tag
-    #     if git rev-parse --verify refs/tags/latest >/dev/null 2>&1; then
-    #       echo "删除现有的 latest tag"
-    #       git tag -d latest
-    #       git push origin :refs/tags/latest
-    #     fi
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: 同步到 CNB
+      if: success()
+      run: |
+        # 删除现有的 latest release
+        curl -X 'DELETE' 'https://api.cnb.cool/xkand/tools' -H 'accept: application/json' -H 'Authorization: ${{ secrets.CNB_TOKEN }}'
+        sleep 10
+        curl -X POST 'https://api.cnb.cool/xkand/-/repos' -H 'Authorization: ${{ secrets.CNB_TOKEN }}' -H 'Content-Type: application/json' -d '{"description": "DockerDeskTop", "license": "MIT", "name": "tools", "visibility": "public"}'
+        sleep 15
+        cd data
+        touch .gitattributes
+        echo "*.asar filter=lfs diff=lfs merge=lfs -text" > .gitattributes
+        echo "*.msi filter=lfs diff=lfs merge=lfs -text" >> .gitattributes
+        echo "*.wsl filter=lfs diff=lfs merge=lfs -text" >> .gitattributes
+        echo "*.exe filter=lfs diff=lfs merge=lfs -text" >> .gitattributes
+        echo "*.zip filter=lfs diff=lfs merge=lfs -text" >> .gitattributes
+        echo "*.dmg filter=lfs diff=lfs merge=lfs -text" >> .gitattributes
+        echo "*.AppxBundle filter=lfs diff=lfs merge=lfs -text" >> .gitattributes
+        rm -rf .git
+        git lfs install
+        git init -b main
+        git config --local user.name cnb.aslCnwswAEA
+        git config --local user.email 'qRw6UksXJbHM5N6LWhxLvB+cnb.aslCnwswAEA@noreply.cnb.cool'
+        git add .
+        git commit -m "upload"
+        git remote add origin https://cnb:${{ secrets.CNB_TOKEN }}@cnb.cool/xkand/tools
+        git push -f origin main
+        cd ..
+      env:
+        GITHUB_TOKEN: ${{ secrets.CNB_TOKEN }}
 
     - name: 彻底删除所有 latest Release 和 Tag
       if: success()
