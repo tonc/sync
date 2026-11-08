@@ -60,6 +60,7 @@ jobs:
         git commit -m "upload"
         git remote add origin https://cnb:${{ secrets.CNB_TOKEN }}@cnb.cool/xkand/tools
         git push -f origin main
+        rm -rf .git
         cd ..
       env:
         GITHUB_TOKEN: ${{ secrets.CNB_TOKEN }}
