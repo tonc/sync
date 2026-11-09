@@ -356,23 +356,23 @@ def get_WSL2():
         ubuntu22_url = data['ModernDistributions']['Ubuntu'][3]['Amd64Url']['Url']
         
         download_file(ubuntu_url, headers=BROWSER_HEADERS)
-        # time.sleep(15)
-        # download_file(ubuntu24_url, headers=BROWSER_HEADERS)
-        # time.sleep(15)
-        # download_file(ubuntu22_url, headers=BROWSER_HEADERS)
-        # time.sleep(15)
+        time.sleep(15)
+        download_file(ubuntu24_url, headers=BROWSER_HEADERS)
+        time.sleep(15)
+        download_file(ubuntu22_url, headers=BROWSER_HEADERS)
+        time.sleep(15)
         # 尝试下载 Debian，但由于 PoW 保护可能失败
-        print("\n[WARNING] Debian 的下载链接受 PoW 保护，可能无法使用 requests 下载")
-        print(f"   手动下载地址: {debian_url}")
-        print("   提示: 可以在浏览器中打开链接下载")
+        # print("\n[WARNING] Debian 的下载链接受 PoW 保护，可能无法使用 requests 下载")
+        # print(f"   手动下载地址: {debian_url}")
+        # print("   提示: 可以在浏览器中打开链接下载")
         
-        try:
-            download_file(debian_url, headers=BROWSER_HEADERS)
-        except DownloadError as e:
-            print(f"   Debian 下载失败（预期情况）: {str(e)}")
-            print("   请手动下载 Debian WSL 文件")
+        # try:
+        #     download_file(debian_url, headers=BROWSER_HEADERS)
+        # except DownloadError as e:
+        #     print(f"   Debian 下载失败（预期情况）: {str(e)}")
+        #     print("   请手动下载 Debian WSL 文件")
         
-        return True
+        # return True
     except Exception as e:
         print(f"[ERROR] 获取WSL2失败: {str(e)}")
         return False
