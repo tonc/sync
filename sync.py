@@ -492,33 +492,33 @@ def main():
     print("=" * 60)
 
     # 1. 获取并排序标签
-    result = get_tags_sorted_by_commit_time("asxez", "DockerDesktop-CN")
+    # result = get_tags_sorted_by_commit_time("asxez", "DockerDesktop-CN")
     
-    # 检查结果
-    if isinstance(result, dict) and 'error' in result:
-        print(f"[ERROR] 程序终止: {result['error']}")
-        return -1
+    # # 检查结果
+    # if isinstance(result, dict) and 'error' in result:
+    #     print(f"[ERROR] 程序终止: {result['error']}")
+    #     return -1
     
-    if not result:
-        print("[ERROR] 没有找到任何标签")
-        return -1
+    # if not result:
+    #     print("[ERROR] 没有找到任何标签")
+    #     return -1
     
-    # 2. 显示排序结果
-    print(f"\n[STATS] 标签排序结果（从新到旧）:")
-    print("-" * 60)
-    for i, tag in enumerate(result[:10], 1):  # 只显示前10个
-        commit_date = datetime.fromisoformat(tag['commit_date'])
-        print(f"{i:2d}. {tag['name']:20} {commit_date.strftime('%Y-%m-%d %H:%M:%S')}")
+    # # 2. 显示排序结果
+    # print(f"\n[STATS] 标签排序结果（从新到旧）:")
+    # print("-" * 60)
+    # for i, tag in enumerate(result[:10], 1):  # 只显示前10个
+    #     commit_date = datetime.fromisoformat(tag['commit_date'])
+    #     print(f"{i:2d}. {tag['name']:20} {commit_date.strftime('%Y-%m-%d %H:%M:%S')}")
     
-    if len(result) > 10:
-        print(f"    ... 还有 {len(result) - 10} 个标签")
+    # if len(result) > 10:
+    #     print(f"    ... 还有 {len(result) - 10} 个标签")
     
-    # 3. 检查最新版本
-    latest_version = result[0]['name']
-    print(f'\n[LATEST] 最新版本: {latest_version}')
+    # # 3. 检查最新版本
+    # latest_version = result[0]['name']
+    # print(f'\n[LATEST] 最新版本: {latest_version}')
     
-    print("\n[SYNC] 开始执行更新流程...")
-    print("=" * 60)
+    # print("\n[SYNC] 开始执行更新流程...")
+    # print("=" * 60)
     
     # 下载所有文件
     success_count = 0
